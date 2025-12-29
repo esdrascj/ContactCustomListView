@@ -1,0 +1,11 @@
+.custom-chat-message_outbound {
+  border-radius: 10px;
+  max-width: 100%;
+  background-color: #0070d2;
+  color: white;
+  align-self: flex-end;
+}
+
+.custom-textarea {
+  width: 100%;
+}

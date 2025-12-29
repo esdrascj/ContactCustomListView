@@ -1,0 +1,45 @@
+<template>
+    <lightning-card title="Dúvidas no processo? Pergunte ao PA!" icon-name="utility:agent_astro">
+        <p>Tem alguma dúvida relacionada ao processo de atendimento? Use o PA para te apoiar no atendimento, com base no nosso playbook 😉</p>
+        <div class="slds-m-around_medium">
+            <lightning-input label="Prompt" value={prompt} onchange={handlePromptChange} disabled={isLoading} required></lightning-input>
+            <div class="slds-m-top_small">
+                <lightning-button 
+                    variant="brand" 
+                    label="Enviar" 
+                    title="Generate response" 
+                    onclick={handleClick}
+                    disabled={isLoading}>
+                </lightning-button>
+            </div>
+            <template if:true={isLoading}>
+                <div class="slds-m-top_medium">
+                    <lightning-spinner 
+                        alternative-text="Processando..." 
+                        size="medium">
+                    </lightning-spinner>
+                </div>
+            </template>
+
+            <template if:true={response}>
+                <div class="slds-m-top_medium">
+                    <div class="custom-chat-message_outbound slds-var-p-around_small">
+                        <div class="slds-chat-message__body">
+                            <div class="slds-chat-message__text">
+                                <h3 class="slds-text-heading_small slds-p-horizontal_small">
+                                    <strong>Resposta do PA:</strong>
+                                </h3>
+                                <div class="slds-m-top_small">
+                                    <lightning-formatted-rich-text 
+                                        class="custom-textarea" 
+                                        value={response}>
+                                    </lightning-formatted-rich-text>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>
