@@ -1,0 +1,133 @@
+<template>
+    <lightning-card title="Consulta API de Portos" icon-name="standard:channel_programs">
+        <div class="slds-p-around_medium">
+            <!-- Seleção de Estado -->
+            <div class="slds-form-element slds-m-bottom_medium">
+                <label class="slds-form-element__label" for="stateSelect">
+                    <abbr class="slds-required" title="required">*</abbr>
+                    Estado
+                </label>
+                <div class="slds-form-element__control">
+                    <lightning-combobox
+                        name="state"
+                        label="Selecione o Estado"
+                        variant="label-hidden"
+                        placeholder="Selecione um estado"
+                        options={stateOptions}
+                        value={selectedState}
+                        onchange={handleStateChange}
+                        required>
+                    </lightning-combobox>
+                </div>
+            </div>
+
+            <!-- Seleção de Porto -->
+            <div class="slds-form-element slds-m-bottom_medium">
+                <label class="slds-form-element__label" for="harborSelect">
+                    <abbr class="slds-required" title="required">*</abbr>
+                    Porto
+                </label>
+                <div class="slds-form-element__control">
+                    <lightning-combobox
+                        name="harbor"
+                        label="Selecione o Porto"
+                        variant="label-hidden"
+                        placeholder="Selecione um porto"
+                        options={harborOptions}
+                        value={selectedHarbor}
+                        onchange={handleHarborChange}
+                        disabled={isHarborDisabled}
+                        required>
+                    </lightning-combobox>
+                </div>
+            </div>
+
+            <!-- Campo Mês -->
+            <div class="slds-form-element slds-m-bottom_medium">
+                <label class="slds-form-element__label" for="monthInput">
+                    <abbr class="slds-required" title="required">*</abbr>
+                    Mês
+                </label>
+                <div class="slds-form-element__control">
+                    <lightning-input
+                        type="number"
+                        name="month"
+                        label="Mês"
+                        variant="label-hidden"
+                        placeholder="Digite o mês (1-12)"
+                        value={monthValue}
+                        onchange={handleMonthChange}
+                        min="1"
+                        max="12"
+                        required>
+                    </lightning-input>
+                </div>
+            </div>
+
+            <!-- Campo Dias -->
+            <div class="slds-form-element slds-m-bottom_medium">
+                <label class="slds-form-element__label" for="daysInput">
+                    <abbr class="slds-required" title="required">*</abbr>
+                    Dias
+                </label>
+                <div class="slds-form-element__control">
+                    <lightning-input
+                        type="text"
+                        name="days"
+                        label="Dias"
+                        variant="label-hidden"
+                        placeholder="Ex: 1,2,10-30"
+                        value={daysValue}
+                        onchange={handleDaysChange}
+                        field-level-help="Informe dias específicos separados por vírgula (ex: 1,30,27) e/ou um período (ex: 10-30)"
+                        required>
+                    </lightning-input>
+                </div>
+            </div>
+
+            <!-- Botão de Consulta -->
+            <div class="slds-m-top_medium">
+                <lightning-button
+                    variant="brand"
+                    label="Consultar API"
+                    title="Consultar API"
+                    onclick={handleConsultar}
+                    class="slds-m-right_small">
+                </lightning-button>
+                <lightning-button
+                    variant="neutral"
+                    label="Limpar"
+                    title="Limpar Formulário"
+                    onclick={handleLimpar}>
+                </lightning-button>
+            </div>
+
+            <!-- Área de Resultado -->
+            <template if:true={showResult}>
+                <div class="slds-m-top_large">
+                    <div class="slds-box slds-theme_shade">
+                        <h3 class="slds-text-heading_small slds-m-bottom_small">Resultado da Consulta:</h3>
+                        <div class="slds-scrollable_x">
+                            <pre>{resultData}</pre>
+                        </div>
+                    </div>
+                </div>
+            </template>
+
+            <!-- Mensagem de Erro -->
+            <template if:true={errorMessage}>
+                <div class="slds-m-top_medium">
+                    <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error" role="alert">
+                        <span class="slds-assistive-text">error</span>
+                        <h2>{errorMessage}</h2>
+                    </div>
+                </div>
+            </template>
+
+            <!-- Loading Spinner -->
+            <template if:true={isLoading}>
+                <lightning-spinner alternative-text="Carregando..." size="medium"></lightning-spinner>
+            </template>
+        </div>
+    </lightning-card>
+</template>
