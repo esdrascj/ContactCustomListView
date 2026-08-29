@@ -1,0 +1,91 @@
+<template> 
+
+    <div class="example"> 
+
+        <div class="slds-form slds-form_stacked"> 
+
+            <lightning-input 
+
+                type="text" 
+
+                name="label" 
+
+                label="Label" 
+
+                value={label} 
+
+                placeholder="Enter toast label" 
+
+                onchange={handleLabelChange} 
+
+            ></lightning-input> 
+
+            <lightning-input 
+
+                type="text" 
+
+                name="message" 
+
+                label="Message" 
+
+                value={message} 
+
+                placeholder="Enter toast message" 
+
+                onchange={handleMessageChange} 
+
+            ></lightning-input> 
+
+            <lightning-combobox 
+
+                name="variant" 
+
+                label="Variant" 
+
+                value={variant} 
+
+                placeholder="Select variant" 
+
+                options={variantOptions} 
+
+                onchange={handleVariantChange} 
+
+            ></lightning-combobox> 
+
+            <lightning-radio-group 
+
+                name="mode" 
+
+                label="Mode" 
+
+                options={modeOptions} 
+
+                value={mode} 
+
+                onchange={handleModeChange} 
+
+                type="radio" 
+
+            ></lightning-radio-group> 
+
+            <div class="slds-m-top_medium"> 
+
+                <lightning-button 
+
+                    variant="brand" 
+
+                    label="Show Toast" 
+
+                    title="Shows a toast notification with the selected options" 
+
+                    onclick={handleShowToast} 
+
+                ></lightning-button> 
+
+            </div> 
+
+        </div> 
+
+    </div> 
+
+</template> 
